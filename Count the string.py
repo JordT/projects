@@ -8,6 +8,7 @@ theBoard = {'topL': ' ', 'topM': ' ', 'topR': ' ', 'midL': ' ',
             'midM': ' ', 'midR': ' ', 'lowL': ' ', 'lowM': ' ', 'lowR': ' '}
 ComputerGoesFirst = False  # Set to true if computer is to go first
 UserChar = ''
+NextMove = ''
 
 welcome = " Hello, let's play tic tac toe! \n \
 Would you like to be X's or O's?"
@@ -60,6 +61,7 @@ def ValidInput(UserFirstMove):
         print("Debug: Input is Valid")
         theBoard[str(UserFirstMove)] = UserChar
         printBoard(theBoard)
+        SecondMove("Test Call")
     else:
         print("Come on now Peralta, that's not the game. You'll need to choose an option above...")
         ValidInput(input())
@@ -67,10 +69,10 @@ def ValidInput(UserFirstMove):
 ##
 # First Move
 ##
-# Makes the first move
+# Makes the first pc move
 if (ComputerGoesFirst == True):
     theBoard['topR'] = 'O'
-    printBoard(theBoard)
+    printBoard(theBoard)    
 else:
     print("Your options are: topL, topM, topR, midL, midM, midR, lowL, lowM, lowR, fullR")
     UserFirstMove = input()
@@ -81,33 +83,24 @@ else:
         ValidInput(UserFirstMove)
 
 
-# Function needs to loop through best options, so it's gone top right, so bottom left first
-#def ComputerMoveTwo():
-#    if (ComputerGoesFirst == True) and (theBoard['topR'] == 'O'):
-#        print("second move successful")
-
-##
-#Verify all user put - needs written
-##
-
-
+#Second move descision tree
 if (ComputerGoesFirst == True):
-    print("Alright chump, you're up. Your options are: topL, topM, topR, midL, midM, midR, lowL, lowM, or lowR.")
-    Move2 = Userinput
+    UserMove()
+else:
+    ComputerMove()
 
-def FirstUserMove():
-    
-
-
-
-# defines first move if PC is to select
-# def FirstMove(UserSelectFirst):
-#    if (UserSelectFirst is 'X'):
-#        #theBoard['topR'] = 'O'
-#        print(theBoard)
-#    else:
-#        print('Debug')
+#UserMove
+def UserMove():
+    print("The User will go next")
 
 
-# Displays the game board
+#ComputerMove
+def ComputerMove():
+    print("The computer will go next")
+
+print("End of Program")
+
+#
+# 
+# # Displays the game board
 # printBoard(theBoard)
