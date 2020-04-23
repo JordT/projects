@@ -8,7 +8,8 @@ theBoard = {'topL': ' ', 'topM': ' ', 'topR': ' ', 'midL': ' ',
             'midM': ' ', 'midR': ' ', 'lowL': ' ', 'lowM': ' ', 'lowR': ' '}
 ComputerGoesFirst = False  # Set to true if computer is to go first
 UserChar = ''
-NextMove = ''
+#NextMove = ''
+UserInput = ''
 
 welcome = " Hello, let's play tic tac toe! \n \
 Would you like to be X's or O's?"
@@ -61,7 +62,6 @@ def ValidInput(UserFirstMove):
         print("Debug: Input is Valid")
         theBoard[str(UserFirstMove)] = UserChar
         printBoard(theBoard)
-        SecondMove("Test Call")
     else:
         print("Come on now Peralta, that's not the game. You'll need to choose an option above...")
         ValidInput(input())
@@ -83,20 +83,39 @@ else:
         ValidInput(UserFirstMove)
 
 
+
+#UserMove
+def UserMove():
+    global UserInput
+    print("Your Move, what's it gonna be punk?")
+    print("topL, topM, topR, midL, midM, midR, lowL, lowM, lowR")
+    UserInput = input()
+    validator(UserInput)
+    
+def validator(i):
+    
+    for i in D.keys(theBoard)
+        
+
+    
+    #if (i == "test"):
+    #    print("validator working")
+
+
+#ComputerMove
+def ComputerMove():
+    print("The computer will go next")
+
 #Second move descision tree
 if (ComputerGoesFirst == True):
     UserMove()
 else:
     ComputerMove()
 
-#UserMove
-def UserMove():
-    print("The User will go next")
 
 
-#ComputerMove
-def ComputerMove():
-    print("The computer will go next")
+
+
 
 print("End of Program")
 
