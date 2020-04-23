@@ -89,20 +89,24 @@ else:
 #UserMove
 def UserMove():
     global UserInput
-    print("Your Move, what's it gonna be punk?")
-    print("topL, topM, topR, midL, midM, midR, lowL, lowM, lowR")
+    global UserChar
+    print("Your move, what's it gonna be punk?")
+    print("(topL, topM, topR, midL, midM, midR, lowL, lowM, lowR)")
     UserInput = input()
     validator(UserInput)
-    
-    #Now we need to check if there's already a move in that space!!!!!!
-    
-    print("this needs to go to descision tree")
+    if (theBoard[UserInput] == ' '):
+        print("that's a valid move!")
+        theBoard[UserInput] = UserChar
+        printBoard(theBoard)
+    else:
+        print("Hmm, there's already a move in that space!")
+    #Now we need to check if there's already a move in that space!!!!!!!!
+
 
 #Validates all user moves   
 def validator(i):
     if i in theBoard:
-        print("Debug: Input is Valid")
-               
+        print("Debug: Input is Valid")    
     else:
         print("Please enter a valid position")
         Return = input()
@@ -122,9 +126,6 @@ if (ComputerGoesFirst == True):
     UserMove()
 else:
     ComputerMove()
-
-
-
 
 
 
