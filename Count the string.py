@@ -1,17 +1,20 @@
-#tic tac toe game
+# tic tac toe game
 
 import sys
 
-#Global Variables
-#Stores the game board
-theBoard = {'topL': ' ', 'topM': ' ', 'topR': ' ', 'midL': ' ', 'midM': ' ', 'midR': ' ', 'lowL': ' ', 'lowM': ' ', 'lowR': ' '}
-ComputerGoesFirst = False #Set to true if computer is to go first
+# Global Variables
+# Stores the game board
+theBoard = {'topL': ' ', 'topM': ' ', 'topR': ' ', 'midL': ' ',
+            'midM': ' ', 'midR': ' ', 'lowL': ' ', 'lowM': ' ', 'lowR': ' '}
+ComputerGoesFirst = False  # Set to true if computer is to go first
 UserChar = ''
 
 welcome = " Hello, let's play tic tac toe! \n \
 Would you like to be X's or O's?"
 
-#generates the board
+# generates the board
+
+
 def printBoard(theBoard):
     print(theBoard['topL'] + '|' + theBoard['topM'] + '|' + theBoard['topR'])
     print('-----')
@@ -19,12 +22,14 @@ def printBoard(theBoard):
     print('-----')
     print(theBoard['lowL'] + '|' + theBoard['lowM'] + '|' + theBoard['lowR'])
 
-#Verify First Userinput
+# Verify First Userinput
+
+
 def UserVerification(UserSelectFirst):
     global UserVerificationCounter
     global ComputerGoesFirst
     global UserChar
-    print("Userinputted " + UserSelectFirst) #debug users input
+    print("Userinputted " + UserSelectFirst)  # debug users input
     if (UserSelectFirst is 'X'):
         print("You've select X's, O's go first you noob.")
         ComputerGoesFirst = True
@@ -38,7 +43,7 @@ def UserVerification(UserSelectFirst):
         UserVerification(UserSelectFirst)
 
 
-#Verify usermove can be made
+# Verify usermove can be made
 def ValidInput(UserFirstMove):
     if (UserFirstMove in theBoard):
         global UserChar
@@ -49,19 +54,20 @@ def ValidInput(UserFirstMove):
         print("Come on now Peralta, that's not the game. You'll need to choose an option above...")
         ValidInput(input())
 
+
 ##
-## Start
+# Start
 ##
 # Code to execute program
 print(welcome)
 UserSelectFirst = input()
 UserVerification(UserSelectFirst)
-print("Debug: Computer goes first? " + str(ComputerGoesFirst)) #debug if True the computer goes first
-
+# debug if True the computer goes first
+print("Debug: Computer goes first? " + str(ComputerGoesFirst))
 
 
 ##
-## First Move
+# First Move
 ##
 # Makes the first move
 if (ComputerGoesFirst == True):
@@ -70,18 +76,17 @@ if (ComputerGoesFirst == True):
 else:
     print("Your options are: topL, topM, topR, midL, midM, midR, lowL, lowM, lowR, fullR")
     UserFirstMove = input()
-    if (UserFirstMove == 'fullR'): #The fullretard test
+    if (UserFirstMove == 'fullR'):  # The fullretard test
         print("Never go full retard.")
         sys.exit()
     else:
         ValidInput(UserFirstMove)
 
 
+# change change change
 
-
-
-#defines first move if PC is to select
-#def FirstMove(UserSelectFirst):
+# defines first move if PC is to select
+# def FirstMove(UserSelectFirst):
 #    if (UserSelectFirst is 'X'):
 #        #theBoard['topR'] = 'O'
 #        print(theBoard)
@@ -89,6 +94,5 @@ else:
 #        print('Debug')
 
 
-#Displays the game board
-#printBoard(theBoard)
-
+# Displays the game board
+# printBoard(theBoard)
