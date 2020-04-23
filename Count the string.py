@@ -42,19 +42,6 @@ def UserVerification(UserSelectFirst):
         UserSelectFirst = input()
         UserVerification(UserSelectFirst)
 
-
-# Verify usermove can be made
-def ValidInput(UserFirstMove):
-    if (UserFirstMove in theBoard):
-        global UserChar
-        print("Debug: Input is Valid")
-        theBoard[str(UserFirstMove)] = UserChar
-        printBoard(theBoard)
-    else:
-        print("Come on now Peralta, that's not the game. You'll need to choose an option above...")
-        ValidInput(input())
-
-
 ##
 # Start
 ##
@@ -65,6 +52,17 @@ UserVerification(UserSelectFirst)
 # debug if True the computer goes first
 print("Debug: Computer goes first? " + str(ComputerGoesFirst))
 
+
+# Verify userinput and makes the first user move
+def ValidInput(UserFirstMove):
+    if (UserFirstMove in theBoard):
+        global UserChar
+        print("Debug: Input is Valid")
+        theBoard[str(UserFirstMove)] = UserChar
+        printBoard(theBoard)
+    else:
+        print("Come on now Peralta, that's not the game. You'll need to choose an option above...")
+        ValidInput(input())
 
 ##
 # First Move
@@ -83,7 +81,24 @@ else:
         ValidInput(UserFirstMove)
 
 
-# change change change
+# Function needs to loop through best options, so it's gone top right, so bottom left first
+#def ComputerMoveTwo():
+#    if (ComputerGoesFirst == True) and (theBoard['topR'] == 'O'):
+#        print("second move successful")
+
+##
+#Verify all user put - needs written
+##
+
+
+if (ComputerGoesFirst == True):
+    print("Alright chump, you're up. Your options are: topL, topM, topR, midL, midM, midR, lowL, lowM, or lowR.")
+    Move2 = Userinput
+
+def FirstUserMove():
+    
+
+
 
 # defines first move if PC is to select
 # def FirstMove(UserSelectFirst):
