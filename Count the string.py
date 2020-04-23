@@ -8,8 +8,10 @@ theBoard = {'topL': ' ', 'topM': ' ', 'topR': ' ', 'midL': ' ',
             'midM': ' ', 'midR': ' ', 'lowL': ' ', 'lowM': ' ', 'lowR': ' '}
 ComputerGoesFirst = False  # Set to true if computer is to go first
 UserChar = ''
-#NextMove = ''
+
+#Determine Moves
 UserInput = ''
+
 
 welcome = " Hello, let's play tic tac toe! \n \
 Would you like to be X's or O's?"
@@ -92,12 +94,21 @@ def UserMove():
     UserInput = input()
     validator(UserInput)
     
-def validator(i):
+    #Now we need to check if there's already a move in that space!!!!!!
     
-    for i in D.keys(theBoard)
-        
+    print("this needs to go to descision tree")
 
-    
+#Validates all user moves   
+def validator(i):
+    if i in theBoard:
+        print("Debug: Input is Valid")
+               
+    else:
+        print("Please enter a valid position")
+        Return = input()
+        validator(Return)
+            
+
     #if (i == "test"):
     #    print("validator working")
 
