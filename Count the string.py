@@ -8,8 +8,11 @@ theBoard = {'topL': ' ', 'topM': ' ', 'topR': ' ', 'midL': ' ',
             'midM': ' ', 'midR': ' ', 'lowL': ' ', 'lowM': ' ', 'lowR': ' '}
 ComputerGoesFirst = False  # Set to true if computer is to go first
 UserChar = ''
+UserMoveHistory = []
+
 
 #Determine Moves
+FirstUserMove = ''
 UserInput = ''
 
 
@@ -61,7 +64,9 @@ print("Debug: Computer goes first? " + str(ComputerGoesFirst))
 def ValidInput(UserFirstMove):
     if (UserFirstMove in theBoard):
         global UserChar
+        global UserMoveHistory
         print("Debug: Input is Valid")
+        UserMoveHistory.append(UserFirstMove)
         theBoard[str(UserFirstMove)] = UserChar
         printBoard(theBoard)
     else:
@@ -86,7 +91,7 @@ else:
 
 
 
-#UserMove
+#UserMove - Verifies a user can make a move, then executes it
 def UserMove():
     global UserInput
     global UserChar
@@ -100,6 +105,11 @@ def UserMove():
         printBoard(theBoard)
     else:
         print("Hmm, there's already a move in that space!")
+        UserInput = input()
+        validator(UserInput)
+        theBoard[UserInput] = UserChar
+        printBoard(theBoard)
+        
     #Now we need to check if there's already a move in that space!!!!!!!!
 
 
@@ -119,7 +129,17 @@ def validator(i):
 
 #ComputerMove
 def ComputerMove():
+    global UserInput
+    global UserChar
     print("The computer will go next")
+    print("The users move was " + UserFirstMove)
+    #Check Horizontal Win Conditions
+    
+
+
+
+
+
 
 #Second move descision tree
 if (ComputerGoesFirst == True):
@@ -128,7 +148,7 @@ else:
     ComputerMove()
 
 
-
+print(UserMoveHistory)
 print("End of Program")
 
 #
