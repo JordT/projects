@@ -30,6 +30,7 @@ def printBoard(theBoard):
     print(theBoard['midL'] + '|' + theBoard['midM'] + '|' + theBoard['midR'])
     print('-----')
     print(theBoard['lowL'] + '|' + theBoard['lowM'] + '|' + theBoard['lowR'])
+    print()
 
 
 ##
@@ -59,21 +60,20 @@ def FirstInputVer(FirstInput):
         FirstInputVer(FirstInput)
 
 
-def ComputerMove():
-    #Check Horizontal Win Conditions
+def computerLoseCheck():
     global UserIsNext
+    global UserMoveHistory
+    global CompChar
     if ('topL' in UserMoveHistory) or ('topM' in UserMoveHistory) or ('topR' in UserMoveHistory): #checks top Horizontal Win condition
         if ('topL' in UserMoveHistory) and ('topR' in UserMoveHistory):
             theBoard['topM'] = CompChar
             printBoard(theBoard)
         elif ('topM' in UserMoveHistory) and ('topR' in UserMoveHistory):
-                theBoard['topL'] = CompChar
-                printBoard(theBoard)
+            theBoard['topL'] = CompChar
+            printBoard(theBoard)
         elif ('topL' in UserMoveHistory) and ('topM' in UserMoveHistory):
-                theBoard['topR'] = CompChar
-                printBoard(theBoard)
-        else:
-            pass
+            theBoard['topR'] = CompChar
+            printBoard(theBoard)
     elif ('midL' in UserMoveHistory) or ('midM' in UserMoveHistory) or ('midR' in UserMoveHistory): #checks for mid horizontal win condition
         if ('midL' in UserMoveHistory) and ('midR' in UserMoveHistory): 
             theBoard['midM'] = CompChar
@@ -84,12 +84,9 @@ def ComputerMove():
         elif ('midL' in UserMoveHistory) and ('midM' in UserMoveHistory):
             theBoard['midR'] = CompChar
             printBoard(theBoard)
-        else:
-            pass
     elif ('lowL' in UserMoveHistory) or ('lowM' in UserMoveHistory) or ('lowR' in UserMoveHistory): #checks for bottom horizontal win condition
         if ('lowL' in UserMoveHistory) and ('lowR' in UserMoveHistory):    
             theBoard['midM'] = CompChar
-
             printBoard(theBoard)
         elif ('midM' in UserMoveHistory) and ('lowR' in UserMoveHistory):
             theBoard['lowL'] = CompChar
@@ -97,39 +94,73 @@ def ComputerMove():
         elif ('lowL' in UserMoveHistory) and ('lowM' in UserMoveHistory):
             theBoard['lowR'] = CompChar
             printBoard(theBoard)
-        else:
-            pass
-    else:
-        UserIsNext = True
-        theBoard['topR'] = CompChar
-        printBoard(theBoard)
+    elif ('topL' in UserMoveHistory) or ('midL' in UserMoveHistory) or ('lowL' in UserMoveHistory): #checks for left vertical win condition
+        if ('topL' in UserMoveHistory) and ('midL' in UserMoveHistory):    
+            theBoard['lowL'] = CompChar
+            printBoard(theBoard)
+        elif ('topL' in UserMoveHistory) and ('lowL' in UserMoveHistory):
+            theBoard['midL'] = CompChar
+            printBoard(theBoard)
+        elif ('midL' in UserMoveHistory) and ('lowL' in UserMoveHistory):
+            theBoard['topL'] = CompChar
+            printBoard(theBoard)
+    elif ('topM' in UserMoveHistory) or ('midM' in UserMoveHistory) or ('lowM' in UserMoveHistory): #checks for mid vertical win condition
+        if ('topM' in UserMoveHistory) and ('midM' in UserMoveHistory):    
+            theBoard['lowM'] = CompChar
+            printBoard(theBoard)
+        elif ('topM' in UserMoveHistory) and ('lowM' in UserMoveHistory):
+            theBoard['midM'] = CompChar
+            printBoard(theBoard)
+        elif ('midM' in UserMoveHistory) and ('lowL' in UserMoveHistory):
+            theBoard['topM'] = CompChar
+            printBoard(theBoard)
+    elif ('topR' in UserMoveHistory) or ('midR' in UserMoveHistory) or ('lowR' in UserMoveHistory): #checks for right vertical win condition
+        if ('topR' in UserMoveHistory) and ('midR' in UserMoveHistory):    
+            theBoard['lowR'] = CompChar
+            printBoard(theBoard)
+        elif ('topR' in UserMoveHistory) and ('lowR' in UserMoveHistory):
+            theBoard['midR'] = CompChar
+            printBoard(theBoard)
+        elif ('midR' in UserMoveHistory) and ('lowR' in UserMoveHistory):
+            theBoard['topR'] = CompChar
+            printBoard(theBoard)
+    elif ('topR' in UserMoveHistory) or ('topL' in UserMoveHistory) or ('lowR' in UserMoveHistory) or ('lowL' in UserMoveHistory): #checks for diag win condition
+        if ('topR' in UserMoveHistory) and ('lowL' in UserMoveHistory):    
+            theBoard['midM'] = CompChar
+            printBoard(theBoard)
+        elif ('topL' in UserMoveHistory) and ('lowR' in UserMoveHistory):
+            theBoard['midM'] = CompChar
+            printBoard(theBoard)   
+    
 
-def UserMove(UserInput):
+    
+
+
+                                      
+
+def UserMove():
     global UserChar
+    global UserIsNext
+    global UserMoveHistory
     print("It's your turn, what's your move?")
     print("Potential Moves are: topL, topM, topR, midL, midM, midR, lowL, lowM, LowR")
     UserInput = input()
-    if (UserInput in theBoard):             ### Checks the Userinput is a valid move ###
+    if UserInput in theBoard:             ### Checks the Userinput is a valid move ###
         print("UserMove is valid")
+        if (theBoard[UserInput] == ' '):
+            theBoard[UserInput] = UserChar
+            UserIsNext = False
+            printBoard(theBoard)
+            UserMoveHistory.append(UserInput)
+        else:
+            print("Whoops, there's already a move there. Enter anther position")
+            UserMove()
     else:
         print("You'll need to enter a Valid move")
-        UserInput = input()
-        UserMove(UserInput)
+        UserMove()
 
 
-def Verifies(UserInput):
-    if (theBoard[UserInput] == ' '):
-        global UserIsNext
-        theBoard[UserInput] == UserChar
-        UserIsNext = False
-        printBoard(theBoard + "one")
-    else:
-        print("Woops, there's a move in that space! Enter another position.")
-        UserInput = input()
-        theBoard[UserInput] = UserChar
-        printBoard(theBoard + "two")
-        Verifies(UserInput)
-        
+
 
 
 ##
@@ -146,9 +177,13 @@ FirstInputVer(FirstInput) #Verifies input and assigns user/comp char
 
 while (WinCondition == False):
     if (UserIsNext == True):
-        print("it'll go do usermove here")
-        UserMove(UserMove)
+        print("Calls UserMove")
+        UserMove()
     else:
-        ComputerMove()
+        computerLoseCheck()
+        theBoard['topR'] = CompChar
+        print("We're not checking win condition")    ### No blocking move required ###          
+        printBoard(theBoard)
+        UserIsNext = True
 
 
